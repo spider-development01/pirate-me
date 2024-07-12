@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+            font-size: large;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 800;
+        }
+
+        .responsive {
+            padding: 0 6px;
+            float: left;
+            width: 24.99999%;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .responsive {
+                width: 49.99999%;
+                margin: 6px 0;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .responsive {
+                width: 100%;
+            }
+        }
+
+        img {
+            border-radius: 30px;
+        }
+
+        /* Header/Navbar */
+        body {
+            background-color: #093c65;
+            color: #ffffff;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            font-size: 30px;
+            text-align: center;
+            margin-top: -60px;
+        }
+
+        .flex-item-left {
+            text-align: left;
+            margin: 60px;
+            padding: 10px;
+            margin-top: 100px;
+            flex: 50%;
+        }
+
+        .flex-item-right {
+            padding: 10px;
+            flex: 50%;
+        }
+
+        /* Responsive layout - makes a one column-layout instead of two-column layout */
+        @media (max-width: 800px) {
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+
+        p {
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-weight: 450;
+            color: #ffffff;
+        }
+
+        .keyword {
+            color: #4D5BCE;
+        }
+
+        .variable {
+            color: #43D9AD;
+        }
+
+        .string {
+            color: #E99287;
+            text-decoration: underline;
+        }
+
+        .equal {
+            color: #ffffff;
+        }
+
+        .code {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 500;
+            color: #4D5BCE;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #607B96;
+        }
+
+        .nav-bar {
+            width: 96%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            position: fixed;
+            background-color: #011627;
+            border: 2px solid white;
+            padding: 5px;
+            border-radius: 50px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+        }
+
+        .logo {
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: x-large;
+        }
+
+        .logo:hover {
+            cursor: pointer;
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .menu li {
+            padding-left: 30px;
+        }
+
+        .menu li a {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--color1);
+            text-align: center;
+            transition: 0.15s ease-in-out;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .menu li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color1);
+            transition: 0.15s ease-in-out;
+        }
+
+        .menu li a:hover:after {
+            width: 100%;
+        }
+
+        .open-menu,
+        .close-menu {
+            position: absolute;
+            color: var(--color1);
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: none;
+        }
+
+        .open-menu {
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        .close-menu {
+            top: 20px;
+            right: 20px;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .hamburger {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        @media(max-width: 610px) {
+            .menu {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 100%;
+                z-index: 100;
+                background-color: #093c65;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .menu li {
+                margin-top: 40px;
+            }
+
+            .menu li a {
+                padding: 10px;
+            }
+
+            .open-menu,
+            .close-menu {
+                display: block;
+                z-index: 1000;
+            }
+
+            #check:checked~.menu {
+                right: 0;
+            }
+
+            #check:checked~.open-menu .hamburger div:nth-child(1) {
+                transform: rotate(-45deg) translate(-7px, 6px);
+            }
+
+            #check:checked~.open-menu .hamburger div:nth-child(2) {
+                opacity: 0;
+            }
+
+            #check:checked~.open-menu .hamburger div:nth-child(3) {
+                transform: rotate(45deg) translate(-7px, -6px);
+            }
+        }
+        .hall{
+            margin-top: 130px;
+        }
+        .episode{
+            text-align: center;
+            border-radius: 30px;
+            background-color: #607B96;
+            padding: 2px;
+            margin-top: 20px;
+        }
+        p{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        h1{
+            font-weight: 600;
+        }
+        h2{
+            color: #ffffff;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class='nav-bar'>
+                <li class='logo'><img src="logo.svg" alt="" srcset="" width="60px"></li>
+                <input type='checkbox' id='check' />
+                <label for='check' class="open-menu">
+                    <div class="hamburger">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </label>         
+                <span class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cartoon.html">Cartoon Series</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <label for='check' class="close-menu"><i class="fas fa-times"></i></label>
+                </span>
+            </ul>
+        </nav>
+    </header>
+    <div class="hall">
+        <h1>Winnie The Pooh
+            <br>
+            <h2>>Season-1</h2>
+        </h1>
+        <a href="winnie\ep1.html"><div class="episode">
+            <p>Episode-1</p>
+        </div>
+    </a>
+    <a href="winnie/ep2.html"><div class="episode">
+            <p>Episode-2</p>
+        </div>
+    </a>
+        <a href="winnie/ep3.html"><div class="episode">
+            <p>Episode-3</p>
+        </div>
+        </a>
+        <a href="winnie/ep4.html"><div class="episode">
+            <p>Episode-4</p>
+        </div>
+        </a>
+        <a href="winnie\ep5.html"><div class="episode">
+            <p>Episode-5</p>
+        </div>
+        </a>
+        <a href="winnie/ep6.html"><div class="episode">
+            <p>Episode-6</p>
+        </div>
+        </a>
+        <a href="winnie/ep7.html"><div class="episode">
+            <p>Episode-7</p>
+        </div>
+        </a>
+        <a href="winnie/ep8.html"><div class="episode">
+            <p>Episode-8</p>
+        </div>
+        </a>
+        <a href="winnie/ep9.html"><div class="episode">
+            <p>Episode-9</p>
+        </div>
+        </a>
+        <a href="winnie/ep10.html"><div class="episode">
+            <p>Episode-10</p>
+        </div>
+        </a>
+        <a href="winnie/ep11.html"><div class="episode">
+            <p>Episode-11</p>
+        </div>
+        </a>
+        <a href="winnie/ep12.html"><div class="episode">
+            <p>Episode-12</p>
+        </div>
+        </a>
+        <a href="winnie/ep13.html"><div class="episode">
+            <p>Episode-13</p>
+        </div>
+        </a>
+        <a href="winnie/ep14.html"><div class="episode">
+            <p>Episode-14</p>
+        </div>
+        </a>
+        <a href="winnie/ep15.html"><div class="episode">
+            <p>Episode-15</p>
+        </div>
+        </a>
+        <a href="winnie/ep16.html"><div class="episode">
+            <p>Episode-16</p>
+        </div>
+        </a>
+        <a href="winnie/ep17.html"><div class="episode">
+            <p>Episode-17</p>
+        </div>
+        </a>
+        <a href="winnie/ep18.html"><div class="episode">
+            <p>Episode-18</p>
+        </div>
+        </a>
+        <a href="winnie/ep19.html"><div class="episode">
+            <p>Episode-19</p>
+        </div>
+        </a>
+        <var>        <a href="winnie/ep20.html"><div class="episode">
+            <p>Episode-20</p>
+        </div>
+        </a>
+        <a href="winnie/ep21.html"><div class="episode">
+            <p>Episode-21</p>
+        </div>
+        </a>
+        <a href="winnie/ep22.html"><div class="episode">
+            <p>Episode-22</p>
+        </div>
+        </a>
+        <a href="winnie/ep23.html"><div class="episode">
+            <p>Episode-23</p>
+        </div>
+        </a>
+        <a href="winnie/ep24.html"><div class="episode">
+            <p>Episode-24</p>
+        </div>
+        </a>
+        <a href="winnie/ep25.html"><div class="episode">
+            <p>Episode-25</p>
+        </div>
+        </a>
+        <a href="winnie/ep26.html"><div class="episode">
+            <p>Episode-26</p>
+        </div>
+        </a>
+    </div>
+</body>
+</html>
